@@ -1,6 +1,6 @@
 # Spiegel Scraper
 
-This is a scraper for the news-website [Speigel.de](https://www.spiegel.de). It can find articles for any topic and scrape their complete articles.
+This is a scraper for the news-website [Spiegel.de](https://www.spiegel.de). It can find articles for any topic and scrape their complete articles.
 
 ## Installation
 
