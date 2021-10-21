@@ -1,0 +1,20 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# virtual environments
+venv
+chromedriver
+
+# Python files
+*.pyc
+__pycache__
+
+# Python Notebook dot files
+.ipynb*
+
+# Secret environment settings
+.env
+env
+*.env*
+.env.prod
