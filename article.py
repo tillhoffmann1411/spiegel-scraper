@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-from helper import rm_all_line_breaks, clean_up_string, split_up_date
+from spiegel_scraper.helper import rm_all_line_breaks, clean_up_string, split_up_date
 
 def get_articels_details(url: str):
     html_text = requests.get(url).text
@@ -14,12 +14,17 @@ def get_articels_details(url: str):
     except:
         print('could not parse author for title: ' + title)
 
-    [date, time] = split_up_date(soup.find('time').text)
+    time_element = soup.find('time')
+    [date, time] = '', ''
+
+    if time_element != None:
+        [date, time] = split_up_date(time_element.text)
+        
     
     paragraphs = soup.find_all('p', class_='')
     long_paragraph = map(lambda p: p.text, paragraphs)
-    text = ' '.join(long_paragraph)
-
+    text = clean_up_string(' '.join(long_paragraph))
+    
     images = soup.find_all('img', {'class': r'^((?!lazyload).)*$'}) # This does not work - fix this later!
     image_src_lst = list(map(lambda img: img['src'], images))
 

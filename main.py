@@ -29,4 +29,4 @@ def fetch_all_articles_for_topic(keyword: str):
   return articles_df
 
 
-articles_df = fetch_all_articles_for_topic(keyword)
+# articles_df = fetch_all_articles_for_topic(keyword)

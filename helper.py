@@ -10,7 +10,7 @@ def rm_all_line_breaks(string: str) -> str:
   return rm_line_breaks(rm_empty_lines(string))
 
 def clean_up_string(string: str) -> str:
-  return string.replace('\n', '').strip()
+  return string.replace('\n', '').replace(';', ',').strip()
 
 def split_up_date(string: str) -> tuple[str, str]:
   cleaned_str = string.replace(' ', '').replace('Uhr', '')

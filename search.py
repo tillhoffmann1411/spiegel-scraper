@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-from helper import clean_up_string, split_up_date
+from spiegel_scraper.helper import clean_up_string, split_up_date
 
 
 def search(keyword: str, show_browser = False, start_on_page = 1):
@@ -20,16 +20,16 @@ def search(keyword: str, show_browser = False, start_on_page = 1):
     # Wait until the articles are loaded
     wait = WebDriverWait(driver, 10)
     wait.until(ec.visibility_of_element_located((By.XPATH, '//*[@id="suchergebnisse"]/section')))
-    new_articles = get_articels_from_page(driver, page)
+    new_articles = get_articels_from_page(driver, page, keyword)
     articles = articles + new_articles
     
   driver.close()
   return articles
 
-def get_articels_from_page(driver: WebDriver, page: int):
+def get_articels_from_page(driver: WebDriver, page: int, keyword: str):
   article_elements = driver.find_elements(By.CSS_SELECTOR, 'article.lg\:py-24.md\:py-24.sm\:py-16')
   articles = []
-  nr = 1
+  nr = 0
   for article in article_elements:
     title = clean_up_string(article.find_element(By.TAG_NAME, 'header').text)
 
@@ -53,7 +53,8 @@ def get_articels_from_page(driver: WebDriver, page: int):
         'date': date,
         'time': time,
         'page': page,
-        'article_on_page': nr
+        'article_on_page': nr,
+        'search_keyword': keyword
       })
   return articles
 
